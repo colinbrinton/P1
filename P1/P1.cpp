@@ -1,6 +1,3 @@
-// P1.cpp : Defines the entry point for the console application.
-//
-
 #include "stdafx.h"
 #include "Book.h"
 #include "Member.h"
@@ -8,11 +5,11 @@
 
 int main()
 {
-	DArray<Book> testArray1[55];
-	DArray<Rating> testArray2[55];
-	DArray<Member> testArray3[55];
+	Book testBook(1999, "Testing It", "Please Work");
 
-	testArray1[0] =
+	DArray<Book> testArray1;
+
+	testArray1.add(testBook);
 
 	return 0;
-}
+} 

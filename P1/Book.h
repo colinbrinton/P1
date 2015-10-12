@@ -5,6 +5,7 @@
 using namespace std;
 
 const int ZERO = 0;
+const int ONE = 1;
 
 template<class Recommend>
 class DArray
@@ -12,10 +13,10 @@ class DArray
 public:
 	DArray()
 	{
-		array = nullptr;
-		size = ZERO;
+		size = ONE;
+		array = new Recommend[size];
 	}
-	DArray(int size)
+	DArray(int initSize)
 	{
 		size = initSize;
 		array = new Recommend[size];
@@ -32,6 +33,7 @@ public:
 	void setSize(int size);
 	void clear();
 	void remove(int index);
+	void* getPtr();
 
 private:
 	Recommend *array;
@@ -51,7 +53,8 @@ class Book
 public:
 	struct data
 	{
-		int isbn, year;
+		unsigned long int isbn;
+		int year;
 		string title, author;
 	};
 
@@ -65,14 +68,21 @@ public:
 		bookData.isbn = ZERO;
 		bookData.year = ZERO;
 	}
-	Book(int isbn, int year, string  title, string author);
+
+	Book(int initYear, string  initTitle, string initAuthor)
+	{
+		bookData.author = initAuthor;
+		bookData.title = initTitle;
+		bookData.year = initYear;
+		bookData.isbn = generateIsbn();
+	}
 
 	//Book File IO Functions
 	void loadFile(ifstream books) const;
 	void saveFile(ofstream &books);
 
 	//Mutator Functions
-	void addBook(data bookData);
+	void addBook(int addYear, string  addTitle, string addAuthor);
 	void setIsbn(data bookData);
 	void setYear(data bookData);
 	void setTitle(data bookData);
@@ -117,6 +127,12 @@ DArray<Recommend>::DArray(const DArray &rhs)
 }
 
 template<class Recommend>
+Recommend& DArray<Recommend>::operator[] (int index)
+{
+	return array[index];
+}
+
+template<class Recommend>
 DArray<Recommend>& DArray<Recommend>::operator= (const DArray &rhs)
 {
 	if (this == &rhs)
@@ -132,6 +148,17 @@ DArray<Recommend>& DArray<Recommend>::operator= (const DArray &rhs)
 
 	return *this;
 }
+
+//template<class Recommend>
+//DArray<Recommend>& DArray<Recommend>::operator= (Recommend &rhs)
+//{
+//	if (this == &rhs)
+//		return *this;
+//
+//	array = rhs;
+//
+//	return *this;
+//}
 
 template<class Recommend>
 int DArray<Recommend>::getSize()
@@ -159,6 +186,32 @@ void DArray<Recommend>::setSize(int resize)
 }
 
 template<class Recommend>
+void DArray<Recommend>::add(const Recommend &obj)
+{
+	int newSize = (size + ONE);
+
+	if (size != ZERO)
+	{
+		Recommend *temp;
+		temp = new Recommend[newSize];
+		for (int i = ZERO; i < size; i++)
+			temp[i] = array[i];
+
+		temp[newSize - ONE] = obj;
+
+		delete[] array;
+		array = temp;
+		size = newSize;
+	}
+
+	else
+	{
+		DArray(1);
+		array[ZERO] = obj;
+	}
+}
+
+template<class Recommend>
 void DArray<Recommend>::remove(int index)
 {
 	if (index <= ZERO)
@@ -181,4 +234,11 @@ void DArray<Recommend>::clear()
 	*array = nullptr;
 	size = 0;
 }
+
+template<class Recommend>
+void* DArray<Recommend>::getPtr()
+{
+	return array;
+}
+
 #endif
