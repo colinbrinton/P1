@@ -83,14 +83,14 @@ public:
 
 	//Mutator Functions
 	void addBook(int addYear, string  addTitle, string addAuthor);
-	void setIsbn(data bookData);
+	void setIsbn();
 	void setYear(data bookData);
 	void setTitle(data bookData);
 	void setAuthor(data bookData);
 
 	//Accessor Functions
 	Book getBook(data bookData) const;
-	int getIsbn() const;
+	unsigned long int getIsbn() const;
 	int getYear() const;
 	string getTitle() const;
 	string getAuthor() const;
@@ -121,7 +121,7 @@ template<class Recommend>
 DArray<Recommend>::DArray(const DArray &rhs)
 {
 	size = rhs.size;
-	array = new Recomend array[size];
+	array = new Recommend[size];
 	for (int i = ZERO; i < size; i++)
 		array[i] = rhs.array[i];
 }
@@ -139,7 +139,7 @@ DArray<Recommend>& DArray<Recommend>::operator= (const DArray &rhs)
 		return *this;
 
 	if (rhs.size == ZERO)
-		remove();
+		clear();
 
 	setSize(rhs.size);
 
@@ -182,16 +182,21 @@ void DArray<Recommend>::setSize(int resize)
 		size = resize;
 	}
 	else
-		remove();
+		clear();
 }
 
 template<class Recommend>
 void DArray<Recommend>::add(const Recommend &obj)
 {
-	int newSize = (size + ONE);
-
-	if (size != ZERO)
+	if (size == ONE)
 	{
+		array[size - ONE] = obj;
+	}
+
+	else
+	{
+		int newSize = (size + ONE);
+
 		Recommend *temp;
 		temp = new Recommend[newSize];
 		for (int i = ZERO; i < size; i++)
@@ -202,12 +207,6 @@ void DArray<Recommend>::add(const Recommend &obj)
 		delete[] array;
 		array = temp;
 		size = newSize;
-	}
-
-	else
-	{
-		DArray(1);
-		array[ZERO] = obj;
 	}
 }
 
@@ -231,7 +230,6 @@ template<class Recommend>
 void DArray<Recommend>::clear()
 {
 	delete[] array;
-	*array = nullptr;
 	size = 0;
 }
 
