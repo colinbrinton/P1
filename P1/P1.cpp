@@ -15,13 +15,17 @@ void readBooks(string bookTxt)
 	ifstream file(bookTxt);
 	if (file.is_open())
 	{
-		while (getline(file, line, ','))
+		while (!(file.eof()))
 		{
+			getline(file, line, ',');
+			cout << line << '\n';
+			getline(file, line, '\n');
 			cout << line << '\n';
 		}
+
 		file.close();
 	}
-	else cout << "Unable to open file";
+	else cout << "Error: Unable to open file";
 
 }
 
@@ -35,7 +39,7 @@ int main()
 
 	unsigned long long int pls = testArray1[0].getIsbn();
 
-	cout << pls;
+	cout << pls << endl;
 
 	readBooks("books.txt");
 
