@@ -9,31 +9,19 @@
 using namespace std;
 
 
-DArray<Book> readBooks(string bookTxt)
+void readBooks(string bookTxt)
 {
-	DArray<Book> newArray;
-	Book newBook;
 	string line;
 	ifstream file(bookTxt);
 	if (file.is_open())
 	{
-
 		while (getline(file, line, ','))
 		{
-			newBook.bookData.author = line;
-			getline(file, line, '\n');
-			newBook.bookData.title = line;
-			newBook.bookData.year = 2000; //fix later
-			newBook.setIsbn();
-
-			newArray.add(newBook);
+			cout << line << '\n';
 		}
-
 		file.close();
 	}
 	else cout << "Unable to open file";
-
-	return newArray;
 
 }
 
@@ -49,11 +37,12 @@ int main()
 
 	cout << pls;
 
-	testArray1 = readBooks("books.txt");
-
-	//testArray1[3].getAuthor
+	readBooks("books.txt");
 
 	cin >> pls;
+
+
+
 
 
 	return 0;
