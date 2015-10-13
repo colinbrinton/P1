@@ -3,12 +3,13 @@
 
 //Rating& Rating::operator= (const Rating& rhs)
 //{
-//	if (this == &rhs)
+//	return *this;
+//	/*if (this == &rhs)
 //		return *this;
 //
 //	ratingData.isbn = rhs.ratingData.isbn;
 //	ratingData.rating = rhs.ratingData.rating;
 //	ratingData.member = rhs.ratingData.member;
 //
-//	return *this;
+//	return *this;*/
 //}

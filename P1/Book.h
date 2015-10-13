@@ -180,7 +180,7 @@ void DArray<Recommend>::setSize(int resize)
 	if (resize < 0)
 	{
 		Recommend *temp;
-		temp = new Recommend(resize);
+		temp = new Recommend[resize];
 		for (int i = ZERO; i < resize; i++)
 			temp[i] = array[i];
 
@@ -195,29 +195,29 @@ void DArray<Recommend>::setSize(int resize)
 template<class Recommend>
 void DArray<Recommend>::add(const Recommend &obj)
 {
-	if (size == ZERO)
+	/*if (size == ZERO)
 	{
-		array[ZERO] = obj;
-		size++;
-	}
+	array[ZERO] = obj;
+	size++;
+	}*/
 
-	else
-	{
-		int newSize = (size + ONE);
+	//else
+	//{
+	int newSize = (size + ONE);
 
-		Recommend *temp;
-		temp = new Recommend[newSize];
+	Recommend *temp;
+	temp = new Recommend[newSize];
 
-		for (int i = ZERO; i < (size); i++)
-			temp[i] = array[i];
+	for (int i = ZERO; i < (size); i++)
+		temp[i] = array[i];
 
-		temp[(newSize - ONE)] = obj;
+	temp[(newSize - ONE)] = obj;
 
-		delete[] array;
-		size = newSize;
-		array = temp;
+	delete[] array;
+	size = newSize;
+	array = temp;
 
-	}
+	//}
 }
 
 template<class Recommend>
@@ -239,7 +239,7 @@ void DArray<Recommend>::remove(int index)
 template<class Recommend>
 void DArray<Recommend>::clear()
 {
-	delete array;
+	delete[] array;
 	size = 0;
 }
 

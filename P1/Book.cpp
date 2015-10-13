@@ -18,12 +18,12 @@ int Book::generateIsbn()
 	isbn += this->bookData.author.capacity();
 	isbn *= this->bookData.year;
 
-	//test
-	/*isbn = isbn % ISBN_MAX + ISBN_MIN;
-	isbn += this->bookData.author[ONE];
-	isbn += this->bookData.title[ONE];
-	isbn += this->bookData.author[ZERO];
-	isbn += this->bookData.title[ZERO];*/
+
+	isbn = isbn % ISBN_MAX + ISBN_MIN;
+	/*isbn += bookData.author[ONE];
+	isbn += bookData.title[ONE];*/
+	/*isbn += bookData.author[ZERO];
+	isbn += bookData.title[ZERO];*/
 
 	static_cast<int>(isbn);
 	return isbn;
