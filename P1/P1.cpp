@@ -57,6 +57,7 @@ void readRatings(string ratingTxt)
 	Rating newRating;
 	Member newMember;
 	DArray<Rating> ratingArray;
+	DArray<Member> memberArray;
 	string line;
 	ifstream file2(ratingTxt);
 	int x;
@@ -67,14 +68,18 @@ void readRatings(string ratingTxt)
 		{
 			file2.clear();
 			getline(file2, line);
-			cout << endl<< line << endl;
-			//newMember.memberData.name = line;
+			//cout << line << endl;
+			newMember.memberData.name = line;
+			newRating.ratingData.member = line;
+			memberArray.add(newMember);
 
 			while (file2 >> x)
 			{
-				cout << x << " ";
+				newRating.ratingData.rating.add(x);
+				//cout << x << " ";
 			}
-			//newRating.ratingData.rating.add(x);
+
+			file2.ignore();
 
 			//remove hardcode
 			//(!isalpha(line[ZERO])) || (line[ZERO] = '-')
@@ -102,23 +107,12 @@ void readRatings(string ratingTxt)
 		file2.close();
 	}
 	else cout << "Error: Unable to open file";
-}
 
-	/*for (int i = ZERO; i < ratingArray.getSize(); i++)
+	for (int i = ZERO; i < memberArray.getSize(); i++)
 	{
-		cout << ratingArray[i].ratingData.member << endl;
-
-		for (int y = ZERO; y < ratingArray[i].ratingData.isbn.getSize(); y++)
-		{
-			cout << ratingArray[i].ratingData.isbn[y] << " ";
-		}*/
-		//cout << ratingArray[i].ratingData.title << endl;
-		//cout << ratingArray[i].ratingData.year << endl;
-		//cout << ratingArray[i].ratingData.isbn << endl;
-	//}
-
-	//cout << newRating.ratingData.rating[0];
-
+		cout << memberArray[i].memberData.name << endl;
+	}
+}
 
 int main()
 {
@@ -133,7 +127,7 @@ int main()
 		cout << books[i].bookData.isbn << endl;
 	}
 
-	cout << endl << endl << books.getSize();
+	//cout << endl << endl << books.getSize();
 	readRatings("ratings.txt");
 
 	/*DArray<int> test;
