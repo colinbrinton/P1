@@ -53,18 +53,22 @@ DArray<Book> readBooks(string bookTxt)
 
 }
 
-void readRatings(string ratingTxt)
+void readRatings(string ratingTxt, DArray<Rating> &ratingArray, DArray<Member> &memberArray)
 {
 	//DArray<Book> bookArray = books;
 	Rating newRating;
 	Member newMember;
-	DArray<Rating> ratingArray;
-	DArray<Member> memberArray;
+	//DArray<Rating> ratingArray;
+	//DArray<Member> memberArray;
+
+
+
 	string line;
 	ifstream file2(ratingTxt);
 	int x;
 	int count2 = ZERO;
 	int count3 = ZERO;
+	
 
 	if (file2.is_open())
 	{
@@ -119,7 +123,7 @@ void readRatings(string ratingTxt)
 	}
 	else cout << "Error: Unable to open file";
 
-	for (int i = ZERO; i < memberArray.getSize(); i++)
+	/*for (int i = ZERO; i < memberArray.getSize(); i++)
 	{
 		cout << memberArray[i].memberData.name << endl;
 		cout << memberArray[i].memberData.account << endl;
@@ -130,15 +134,18 @@ void readRatings(string ratingTxt)
 		cout << ratingArray[i].ratingData.isbn << endl;
 		cout << ratingArray[i].ratingData.member << endl;
 		cout << ratingArray[i].ratingData.rating << endl;
-	}
+	}*/
 }
 
 int main()
 {
 	DArray<Book> books = readBooks("books.txt");
+	DArray<Member> members;
+	DArray<Rating> ratings;
 
+	readRatings("ratings.txt", ratings, members);
 
-	for (int i = ZERO; i < books.getSize(); i++)
+	/*for (int i = ZERO; i < books.getSize(); i++)
 	{
 		cout << books[i].bookData.author << endl;
 		cout << books[i].bookData.title << endl;
@@ -146,12 +153,29 @@ int main()
 		cout << books[i].bookData.isbn << endl;
 	}
 
+	for (int i = ZERO; i < members.getSize(); i++)
+	{
+		cout << members[i].memberData.name << endl;
+		cout << members[i].memberData.account << endl;
+	}
+
+	cout << endl;
+
+	for (int i = ZERO; i < ratings.getSize(); i++)
+	{
+		cout << ratings[i].ratingData.isbn << endl;
+		cout << ratings[i].ratingData.member << endl;
+		cout << ratings[i].ratingData.rating << endl;
+	}*/
+
 	//cout << endl << endl << books.getSize();
-	readRatings("ratings.txt");
+	//readRatings("ratings.txt");
 
 	/*DArray<int> test;
 	test[3];
 	test.add(3);*/
+
+
 
 	int wait;
 	cin >> wait;
