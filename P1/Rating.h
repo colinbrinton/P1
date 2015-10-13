@@ -57,7 +57,7 @@ public:
 
 	//Accessor Functions
 	// ****************MOVE THESE*****************
-	int getRating(data ratingData) const;
+	int getRating() const;
 	void displayRatings(data ratingData) const;
 
 	//Return an array of ISBN's of recomended books

@@ -11,6 +11,8 @@ const int RATING_LENG = 1;
 
 using namespace std;
 
+int getSimUser(int accnum, DArray<Book> b, DArray<Member> m, DArray<Rating> r);
+
 
 DArray<Book> readBooks(string bookTxt)
 {
@@ -174,6 +176,14 @@ int main()
 	/*DArray<int> test;
 	test[3];
 	test.add(3);*/
+	int login;
+	cout << "Please log in with your account number: ";
+	cin >> login;
+
+	int user = getSimUser(login, books, members, ratings);
+
+	cout << endl << user;
+	
 
 
 
@@ -181,4 +191,40 @@ int main()
 	cin >> wait;
 
 	return 0;
+}
+
+int getSimUser(int accnum, DArray<Book> b, DArray<Member> m, DArray<Rating> r)
+{
+	int user = accnum;
+	int indexMin;
+	int indexMax;
+	int indexNum;
+	int rateSize = (r.getSize() - ONE);
+	int simFac = ZERO;
+	int compat = ZERO;
+	int compatUser;
+	int totalUsers = (m.getSize() - ONE);
+
+	int size = b.getSize();
+	indexNum = (size - ONE);
+
+	indexMin = (user * indexNum);
+	indexMax = (indexMin + indexNum);
+
+	for (int x = ZERO; x < (totalUsers - ONE); x++)
+	{
+		for (int y = indexMin; y <= indexMax; y++)
+		{
+			for (int i =(x * indexNum); i < (((indexNum + ONE) * x) + indexNum ) ; i++)
+			{
+				simFac += (r[i].getRating()) * (r[y].getRating());
+			}
+			if (simFac > compat)
+			{
+				compat = simFac;
+				compatUser = x;
+			}
+		}
+	}
+	return compatUser;
 }

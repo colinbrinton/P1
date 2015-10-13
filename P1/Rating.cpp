@@ -13,3 +13,8 @@
 //
 //	return *this;*/
 //}
+
+int Rating::getRating() const
+{
+	return ratingData.rating;
+}

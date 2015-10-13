@@ -53,7 +53,7 @@ class Book
 public:
 	struct data
 	{
-		unsigned long int isbn;
+		unsigned long int isbn; //change
 		int year;
 		string title, author;
 	};
