@@ -25,14 +25,14 @@ public:
 	{
 		ratingData.member = "";
 	}
-	Rating(DArray<int> initIsbn, DArray<int> initRating, string initMember)
+	/*Rating(DArray<int> initIsbn, DArray<int> initRating, string initMember)
 	{
 		ratingData.isbn = initIsbn;
 		ratingData.rating = initRating;
 		ratingData.member = initMember;
-	}
+	}*/
 
-	Rating &operator= (const Rating& rhs);
+	//Rating &operator= (const Rating& rhs);
 
 	//Mutator Functions
 	void setRating(data ratingData);

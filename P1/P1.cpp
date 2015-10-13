@@ -72,6 +72,7 @@ void readRatings(string ratingTxt)
 			newMember.memberData.name = line;
 			newRating.ratingData.member = line;
 			memberArray.add(newMember);
+			//ratingArray.add(newRating);
 
 			while (file2 >> x)
 			{
@@ -111,6 +112,7 @@ void readRatings(string ratingTxt)
 	for (int i = ZERO; i < memberArray.getSize(); i++)
 	{
 		cout << memberArray[i].memberData.name << endl;
+		cout << newRating.ratingData.rating[i] << endl;
 	}
 }
 
