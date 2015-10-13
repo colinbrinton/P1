@@ -51,12 +51,13 @@ DArray<Book> readBooks(string bookTxt)
 
 }
 
-void readRatings(string ratingTxt)
+void readRatings(string ratingTxt, DArray<Book> bookArray)
 {
 	//DArray<Book> bookArray = books;
 	Rating newRating;
 	Member newMember;
 	DArray<Rating> ratingArray;
+	DArray<Book> books = bookArray;
 	string line;
 	ifstream file(ratingTxt);
 	int x;
@@ -65,14 +66,22 @@ void readRatings(string ratingTxt)
 	{
 		while (!(file.eof()))
 		{
-			getline(file, line);
-			newMember.memberData.name = line;
-			line = " ";
+			file.ignore(200, '\n');
+			getline(file, line, '\n');
+			cout << line << endl;
+			//newRating.ratingData.member = line;
+			//line = " ";
 
 			while (file >> x)
+			{
+				cout << x << " ";
+				/*int i = ZERO;
 				newRating.ratingData.rating.add(x);
-			
-			
+				newRating.ratingData.isbn.add(books[i].bookData.isbn);
+				++i;*/
+			}
+			ratingArray.add(newRating);
+			//ratingArray.add(newRating);
 			
 			//remove hardcode
 			//(!isalpha(line[ZERO])) || (line[ZERO] = '-')
@@ -92,31 +101,26 @@ void readRatings(string ratingTxt)
 			//		newRating.ratingData.rating.add(x);
 			//	}
 			//}
-
-			newRating.ratingData.isbn[2];
-
-			ratingArray.add(newRating);
 		}
 		file.close();
 	}
 	else cout << "Error: Unable to open file";
 
 
-	for (int i = ZERO; i < ratingArray.getSize(); i++)
-	{
-		cout << ratingArray[i].ratingData.member << endl;
+	//for (int i = ZERO; i < ratingArray.getSize(); i++)
+	//{
+	//	cout << ratingArray[i].ratingData.member << endl;
 
-		for (int y = ZERO; y < ratingArray[i].ratingData.isbn.getSize(); y++)
-		{
-			cout << ratingArray[i].ratingData.isbn[y] << " ";
-		}
-		//cout << ratingArray[i].ratingData.title << endl;
-		//cout << ratingArray[i].ratingData.year << endl;
-		//cout << ratingArray[i].ratingData.isbn << endl;
+	//	for (int y = ZERO; y < ratingArray[i].ratingData.isbn.getSize(); y++)
+	//	{
+	//		cout << ratingArray[i].ratingData.isbn[y] << " ";
+	//	}
+	//	//cout << ratingArray[i].ratingData.title << endl;
+	//	//cout << ratingArray[i].ratingData.year << endl;
+	//	//cout << ratingArray[i].ratingData.isbn << endl;
 	}
 
-	cout << newRating.ratingData.rating[0];
-}
+	//cout << newRating.ratingData.rating[0];
 
 int main()
 {
@@ -132,11 +136,11 @@ int main()
 	}
 
 	cout << endl << endl << books.getSize();
-	readRatings("ratings.txt");
+	readRatings("ratings.txt", books);
 
-	DArray<int> test;
+	/*DArray<int> test;
 	test[3];
-	test.add(3);
+	test.add(3);*/
 
 	int wait;
 	cin >> wait;
