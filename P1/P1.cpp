@@ -1,3 +1,4 @@
+//P1.cpp
 #include "stdafx.h"
 #include "Book.h"
 #include "Member.h"
@@ -11,17 +12,33 @@ using namespace std;
 
 void readBooks(string bookTxt)
 {
+	Book newBook;
+	DArray<Book> bookArray;
 	string line;
 	ifstream file(bookTxt);
+
 	if (file.is_open())
 	{
 		while (!(file.eof()))
 		{
 			getline(file, line, ',');
-			cout << line << '\n';
+			newBook.bookData.author = line;
 			getline(file, line, '\n');
-			cout << line << '\n';
+			newBook.bookData.title = line;
+			newBook.bookData.year = 2004; //Place holder
+			newBook.setIsbn();
+			bookArray.add(newBook);
+			
 		}
+
+		for (int i = ZERO; i < 55; i++)
+		{
+			cout << bookArray[i].bookData.author << endl;
+			cout << bookArray[i].bookData.title << endl;
+			cout << bookArray[i].bookData.year << endl;
+			cout << bookArray[i].bookData.isbn << endl;
+		}
+
 
 		file.close();
 	}
@@ -31,23 +48,11 @@ void readBooks(string bookTxt)
 
 int main()
 {
-	Book testBook(1999, "Testing It", "Please Work");
-
-	DArray<Book> testArray1;
-
-	testArray1.add(testBook);
-
-	unsigned long long int pls = testArray1[0].getIsbn();
-
-	cout << pls << endl;
 
 	readBooks("books.txt");
 
-	cin >> pls;
-
-
-
-
+	int wait;
+	cin >> wait;
 
 	return 0;
 } 

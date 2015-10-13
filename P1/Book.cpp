@@ -5,6 +5,7 @@ const unsigned long int ISBN_MIN = 100000;
 const unsigned long int ISBN_MAX = 999999;
 
 
+//Generate a unique isbn
 int Book::generateIsbn()
 {
 	unsigned long long int isbn;
@@ -24,6 +25,7 @@ int Book::generateIsbn()
 	isbn += this->bookData.author[ZERO];
 	isbn += this->bookData.title[ZERO];
 
+	static_cast<int>(isbn);
 	return isbn;
 }
 
@@ -43,5 +45,5 @@ unsigned long int Book::getIsbn() const
 
 void Book::setIsbn()
 {
-	generateIsbn();
+	this->bookData.isbn = generateIsbn();
 }
