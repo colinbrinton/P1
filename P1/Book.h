@@ -34,7 +34,7 @@ public:
 	}
 	DArray(const DArray &rhs);
 	DArray &operator= (const DArray &rhs);
-	DArray &operator= (const Recommend &rhs);
+	//DArray &operator= (const Recommend &rhs);
 	Recommend& operator[] (int index);
 	void add(const Recommend &obj);
 	int getSize();
@@ -156,16 +156,16 @@ DArray<Recommend>& DArray<Recommend>::operator= (const DArray &rhs)
 	return *this;
 }
 
-template<class Recommend>
-DArray<Recommend>& DArray<Recommend>::operator= (const Recommend &rhs)
-{
-	if (this == &rhs)
-		return *this;
-
-	array[size] = rhs;
-
-	return *this;
-}
+//template<class Recommend>
+//DArray<Recommend>& DArray<Recommend>::operator= (const Recommend &rhs)
+//{
+//	if (this == &rhs)
+//		return *this;
+//
+//	array[size] = rhs;
+//
+//	return *this;
+//}
 
 template<class Recommend>
 int DArray<Recommend>::getSize()
@@ -180,7 +180,7 @@ void DArray<Recommend>::setSize(int resize)
 	if (resize < 0)
 	{
 		Recommend *temp;
-		temp = new Recommend(resize);
+		temp = new Recommend[resize];
 		for (int i = ZERO; i < resize; i++)
 			temp[i] = array[i];
 
@@ -195,14 +195,14 @@ void DArray<Recommend>::setSize(int resize)
 template<class Recommend>
 void DArray<Recommend>::add(const Recommend &obj)
 {
-	if (size == ZERO)
+	/*if (size == ZERO)
 	{
 		array[ZERO] = obj;
 		size++;
-	}
+	}*/
 
-	else
-	{
+	//else
+	//{
 		int newSize = (size + ONE);
 
 		Recommend *temp;
@@ -217,7 +217,7 @@ void DArray<Recommend>::add(const Recommend &obj)
 		size = newSize;
 		array = temp;
 
-	}
+	//}
 }
 
 template<class Recommend>

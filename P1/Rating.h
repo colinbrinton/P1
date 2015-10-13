@@ -13,7 +13,9 @@ class Rating
 public:
 	struct data
 	{
-		int isbn, rating;
+		
+		DArray<int> rating;
+		DArray<int> isbn;
 		string member;
 	};
 
@@ -25,7 +27,14 @@ public:
 		ratingData.rating = ZERO;
 		ratingData.member = "";
 	}
-	Rating(int isbn, int rating, string member);
+	Rating(DArray<int> initIsbn, DArray<int> initRating, string initMember)
+	{
+		ratingData.isbn = initIsbn;
+		ratingData.rating = initRating;
+		ratingData.member = initMember;
+	}
+
+	Rating &operator= (const Rating& rhs);
 
 	//Mutator Functions
 	void setRating(data ratingData);
