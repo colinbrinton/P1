@@ -9,7 +9,6 @@ const unsigned long int ISBN_MAX = 999999;
 int Book::generateIsbn()
 {
 	unsigned long long int isbn;
-	//int isbn;
 
 	isbn = this->bookData.title.length();
 	isbn += this->bookData.title.size();
@@ -19,15 +18,14 @@ int Book::generateIsbn()
 	isbn += this->bookData.author.capacity();
 	isbn *= this->bookData.year;
 
-
-	isbn = isbn % ISBN_MAX + ISBN_MIN;
+	//test
+	/*isbn = isbn % ISBN_MAX + ISBN_MIN;
 	isbn += this->bookData.author[ONE];
 	isbn += this->bookData.title[ONE];
 	isbn += this->bookData.author[ZERO];
-	isbn += this->bookData.title[ZERO];
+	isbn += this->bookData.title[ZERO];*/
 
 	static_cast<int>(isbn);
-
 	return isbn;
 }
 

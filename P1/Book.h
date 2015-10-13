@@ -76,7 +76,7 @@ public:
 		bookData.year = initYear;
 		bookData.isbn = generateIsbn();
 	}
-	
+
 	//Book File IO Functions
 	void loadFile(ifstream books) const;
 	void saveFile(ofstream &books);
@@ -146,7 +146,7 @@ DArray<Recommend>& DArray<Recommend>::operator= (const DArray &rhs)
 		return *this;
 
 	//if (rhs.size == ZERO)
-		//clear();
+	//clear();
 
 	setSize(rhs.size);
 
@@ -188,28 +188,26 @@ void DArray<Recommend>::setSize(int resize)
 		array = temp;
 		size = resize;
 	}
-	//else
-		//clear();
+	else
+		clear();
 }
 
 template<class Recommend>
 void DArray<Recommend>::add(const Recommend &obj)
 {
-	/*if (size == ZERO)
+	if (size == ZERO)
 	{
-		Recommend *temp;
-		temp = new Recommend[ONE];
 		array[ZERO] = obj;
 		size++;
-	}*/
+	}
 
-	//else
-	//{
+	else
+	{
 		int newSize = (size + ONE);
 
 		Recommend *temp;
 		temp = new Recommend[newSize];
-		
+
 		for (int i = ZERO; i < (size); i++)
 			temp[i] = array[i];
 
@@ -219,7 +217,7 @@ void DArray<Recommend>::add(const Recommend &obj)
 		size = newSize;
 		array = temp;
 
-	//}
+	}
 }
 
 template<class Recommend>
@@ -228,7 +226,7 @@ void DArray<Recommend>::remove(int index)
 	if (index <= ZERO)
 	{
 		if (size == ONE)
-			//clear();
+			clear();
 		else
 		{
 			for (int i = index; i < (size - ONE); i++)
@@ -241,7 +239,7 @@ void DArray<Recommend>::remove(int index)
 template<class Recommend>
 void DArray<Recommend>::clear()
 {
-	delete[] array;
+	delete array;
 	size = 0;
 }
 
