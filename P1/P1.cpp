@@ -18,6 +18,7 @@ DArray<Book> readBooks(string bookTxt)
 	DArray<Book> bookArray;
 	string line;
 	ifstream file(bookTxt);
+	int count = 0;
 
 	if (file.is_open())
 	{
@@ -27,8 +28,9 @@ DArray<Book> readBooks(string bookTxt)
 			newBook.bookData.author = line;
 			getline(file, line, '\n');
 			newBook.bookData.title = line;
+			++count;
 			newBook.bookData.year = 2004; //Place holder
-			newBook.setIsbn();
+			newBook.setIsbn(count);
 			bookArray.add(newBook);
 
 		}
@@ -61,6 +63,8 @@ void readRatings(string ratingTxt)
 	string line;
 	ifstream file2(ratingTxt);
 	int x;
+	int count2 = ZERO;
+	int count3 = ZERO;
 
 	if (file2.is_open())
 	{
@@ -70,13 +74,19 @@ void readRatings(string ratingTxt)
 			getline(file2, line);
 			//cout << line << endl;
 			newMember.memberData.name = line;
-			newRating.ratingData.member = line;
+			++count2;
+			newMember.memberData.account = count2;
 			memberArray.add(newMember);
 			//ratingArray.add(newRating);
 
+			count3 = ZERO;
 			while (file2 >> x)
 			{
-				newRating.ratingData.rating.add(x);
+				newRating.ratingData.rating = x;
+				++count3;
+				newRating.ratingData.isbn = count3;
+				newRating.ratingData.member = count2;
+				ratingArray.add(newRating);
 				//cout << x << " ";
 			}
 
@@ -112,7 +122,14 @@ void readRatings(string ratingTxt)
 	for (int i = ZERO; i < memberArray.getSize(); i++)
 	{
 		cout << memberArray[i].memberData.name << endl;
-		cout << newRating.ratingData.rating[i] << endl;
+		cout << memberArray[i].memberData.account << endl;
+	}
+
+	for (int i = ZERO; i < ratingArray.getSize(); i++)
+	{
+		cout << ratingArray[i].ratingData.isbn << endl;
+		cout << ratingArray[i].ratingData.member << endl;
+		cout << ratingArray[i].ratingData.rating << endl;
 	}
 }
 

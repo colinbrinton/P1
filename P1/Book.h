@@ -12,10 +12,11 @@ class DArray
 {
 private:
 	Recommend *array;
-	int size;
-	int bitSize;
 
 public:
+
+	int size;
+
 	DArray()
 	{
 		size = ZERO;
@@ -34,7 +35,7 @@ public:
 	}
 	DArray(const DArray &rhs);
 	DArray &operator= (const DArray &rhs);
-	//DArray &operator= (const Recommend &rhs);
+	DArray &operator= (const Recommend &rhs);
 	Recommend& operator[] (int index);
 	void add(const Recommend &obj);
 	int getSize();
@@ -47,7 +48,6 @@ public:
 class Book
 {
 	//Generate a unique int for book ISBN
-	int generateIsbn();
 
 
 public:
@@ -74,7 +74,6 @@ public:
 		bookData.author = initAuthor;
 		bookData.title = initTitle;
 		bookData.year = initYear;
-		bookData.isbn = generateIsbn();
 	}
 
 	//Book File IO Functions
@@ -83,7 +82,7 @@ public:
 
 	//Mutator Functions
 	void addBook(int addYear, string  addTitle, string addAuthor);
-	void setIsbn();
+	void setIsbn(int count);
 	void setYear(data bookData);
 	void setTitle(data bookData);
 	void setAuthor(data bookData);
@@ -156,16 +155,16 @@ DArray<Recommend>& DArray<Recommend>::operator= (const DArray &rhs)
 	return *this;
 }
 
-//template<class Recommend>
-//DArray<Recommend>& DArray<Recommend>::operator= (const Recommend &rhs)
-//{
-//	if (this == &rhs)
-//		return *this;
-//
-//	array[size] = rhs;
-//
-//	return *this;
-//}
+template<class Recommend>
+DArray<Recommend>& DArray<Recommend>::operator= (const Recommend &rhs)
+{
+	if (this == &rhs)
+		return *this;
+
+	array[size] = rhs;
+
+	return *this;
+}
 
 template<class Recommend>
 int DArray<Recommend>::getSize()
@@ -248,5 +247,6 @@ void* DArray<Recommend>::getPtr()
 {
 	return array;
 }
+
 
 #endif

@@ -13,18 +13,36 @@ class Rating
 public:
 	struct data
 	{
-
-		DArray<int> rating;
-		DArray<int> isbn;
-		string member;
+		int rating;
+		int isbn;
+		int member;
 	};
 
 	data ratingData;
 	//Constructors (Default and Initializing)
-	Rating()
+	Rating() {}
+
+	Rating& Rating::operator= (const Rating &rhs)
 	{
-		ratingData.member = "";
+		if (this == &rhs)
+			return *this;
+
+		//if (rhs.size == ZERO)
+		//clear();
+		ratingData.isbn = rhs.ratingData.isbn;
+		ratingData.rating = rhs.ratingData.rating;
+		ratingData.member = rhs.ratingData.member;
+
+		return *this;
 	}
+
+	/*Rating& Rating::operator[] (int index)
+	{
+		Rating *ptr;
+		ptr = ratingData.rating.getPtr;
+
+		return ptr[index];
+	}*/
 	/*Rating(DArray<int> initIsbn, DArray<int> initRating, string initMember)
 	{
 		ratingData.isbn = initIsbn;

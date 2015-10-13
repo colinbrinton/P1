@@ -13,7 +13,8 @@ public:
 
 	struct data
 	{
-		string account, name;
+		string name;
+		int account;
 	};
 
 	data memberData;
@@ -21,7 +22,7 @@ public:
 	//Constructors (Default and Initializing)
 	Member()
 	{
-		memberData.account = "";
+		memberData.account = ZERO;
 		memberData.name = "";
 	}
 	Member(data memberData);
