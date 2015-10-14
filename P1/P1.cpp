@@ -8,10 +8,13 @@
 #include <sstream>
 
 const int RATING_LENG = 1;
+const int THREE = 3;
+const int FIVE = 5;
 
 using namespace std;
 
 int getSimUser(int accnum, DArray<Book> b, DArray<Member> m, DArray<Rating> r);
+void getRecomendation(int compatUser, DArray<Book> b, DArray<Member> m, DArray<Rating> r);
 
 
 DArray<Book> readBooks(string bookTxt)
@@ -180,11 +183,11 @@ int main()
 	cout << "Please log in with your account number: ";
 	cin >> login;
 
-	int user = getSimUser(login, books, members, ratings);
+	int recoUser = getSimUser(login, books, members, ratings);
 
-	cout << endl << user;
+	//cout << endl << recoUser << endl;
 	
-
+	getRecomendation(recoUser, books, members, ratings);
 
 
 	int wait;
@@ -199,32 +202,71 @@ int getSimUser(int accnum, DArray<Book> b, DArray<Member> m, DArray<Rating> r)
 	int indexMin;
 	int indexMax;
 	int indexNum;
-	int rateSize = (r.getSize() - ONE);
+	//int rateSize = (r.getSize() - ONE);
 	int simFac = ZERO;
 	int compat = ZERO;
-	int compatUser;
+	int compatUser = ZERO;
 	int totalUsers = (m.getSize() - ONE);
+	int sum = 0;
 
-	int size = b.getSize();
+	int size = b.size;
 	indexNum = (size - ONE);
 
 	indexMin = (user * indexNum);
 	indexMax = (indexMin + indexNum);
 
-	for (int x = ZERO; x < (totalUsers - ONE); x++)
+	for (int x = ZERO; x <= totalUsers; x++)
 	{
+		simFac = ZERO;
+		if (x == accnum)
+			++x;
 		for (int y = indexMin; y <= indexMax; y++)
 		{
-			for (int i =(x * indexNum); i < (((indexNum + ONE) * x) + indexNum ) ; i++)
+			for (int i =(x * size); i < ((size * x) + indexNum ) ; i++)
 			{
-				simFac += (r[i].getRating()) * (r[y].getRating());
+				simFac = (r[i].ratingData.rating) * (r[y].ratingData.rating);
+				sum = (sum + simFac);
 			}
-			if (simFac > compat)
-			{
-				compat = simFac;
-				compatUser = x;
-			}
+		
+		}
+		if (sum > compat)
+		{
+			compat = sum;
+			compatUser = x;
 		}
 	}
 	return compatUser;
+}
+
+void getRecomendation(int compatUser, DArray<Book> b, DArray<Member> m, DArray<Rating> r)
+{
+	int totalUsers = (m.getSize() - ONE);
+	int u = compatUser;
+	//int rateSize = r.getSize();
+	int size = b.size;
+	int indexNum = (size - ONE);
+	int recBook;
+	int temp = u;
+
+	string simName = m[u].memberData.name;
+
+	cout << endl << "You share similar tastes with User: " << simName << "." << endl;
+	cout << "Based on books you haven't read yet that were rated highly by this user," << endl;
+	cout << "here are some recomendations: " << endl << endl;
+
+	for (int i = (u * size); i < ((size * u) + indexNum); i++)
+	{
+		temp++;
+		if ((r[i].ratingData.rating == FIVE || r[i].ratingData.rating == THREE) &&
+			(r[temp].ratingData.rating == ZERO))
+		{
+			recBook = r[i].ratingData.isbn;
+			cout << b[recBook].bookData.title << endl;
+			cout << b[recBook].bookData.author << endl;
+			cout << b[recBook].bookData.year << endl;
+			cout << endl;
+		}
+	}
+
+	//r[i].ratingData.
 }

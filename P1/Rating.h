@@ -22,19 +22,7 @@ public:
 	//Constructors (Default and Initializing)
 	Rating() {}
 
-	Rating& Rating::operator= (const Rating &rhs)
-	{
-		if (this == &rhs)
-			return *this;
-
-		//if (rhs.size == ZERO)
-		//clear();
-		ratingData.isbn = rhs.ratingData.isbn;
-		ratingData.rating = rhs.ratingData.rating;
-		ratingData.member = rhs.ratingData.member;
-
-		return *this;
-	}
+	Rating& Rating::operator= (const Rating &rhs);
 
 	/*Rating& Rating::operator[] (int index)
 	{
